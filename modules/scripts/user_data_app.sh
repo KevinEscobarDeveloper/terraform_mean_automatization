@@ -5,7 +5,7 @@ sudo apt-get install -y git curl nginx
 curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
 sudo apt-get install -y nodejs
 
-git clone https://github.com/KevinEscobarDeveloper/mean_app_application/opt/mean
+git clone https://github.com/KevinEscobarDeveloper/mean_app.git /opt/mean
 cd /opt/mean
 npm install
 
