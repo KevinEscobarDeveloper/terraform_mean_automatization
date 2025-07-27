@@ -10,7 +10,6 @@ resource "aws_nat_gateway" "nat" {
     Name = "mean-nat-gateway"
   }
 
-  depends_on = [var.internet_gateway_id]
 }
 
 resource "aws_route_table" "private" {

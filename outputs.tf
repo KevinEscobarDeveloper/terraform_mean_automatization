@@ -11,8 +11,8 @@ output "mongo_private_ip" {
   value = module.ec2_mongo.private_ip
 }
 output "alb_dns" {
-  value = module.elb.dns_name
+  value = module.alb.alb_dns_name
 }
 output "nat_gateway_ip" {
-  value = module.nat_gateway.nat_ip
+  value = module.nat_gateway.nat_gateway_public_ip
 }

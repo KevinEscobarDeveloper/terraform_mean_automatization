@@ -1,13 +1,17 @@
 #!/bin/bash
+set -e
+
 sudo apt-get update
 sudo apt-get install -y git curl nginx
 
 curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
 sudo apt-get install -y nodejs
 
-git clone https://github.com/KevinEscobarDeveloper/mean_app.git /opt/mean
+git clone https://github.com/meanjs/mean.git /opt/mean
 cd /opt/mean
 npm install
+
+nohup npm start > /opt/mean/app.log 2>&1 &
 
 sudo bash -c 'cat > /etc/nginx/sites-available/default <<EOF
 server {
@@ -23,8 +27,4 @@ server {
     }
 }
 EOF'
-
 sudo systemctl restart nginx
-
-# Inicia la app (modo desarrollo; para producción usar pm2 o systemd)
-npm start &

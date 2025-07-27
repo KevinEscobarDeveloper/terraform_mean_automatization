@@ -11,9 +11,11 @@ module "vpc" {
 }
 
 module "security_group" {
-  source             = "./modules/security_group"
-  vpc_id             = module.vpc.vpc_id
-  public_subnet_cidr = var.public_subnet_cidr
+  source              = "./modules/security_group"
+  vpc_id              = module.vpc.vpc_id
+  public_subnet_cidr  = var.public_subnet_cidr
+  private_subnet_cidr = var.private_subnet_cidr
+  name                = var.project_name
 }
 
 module "ec2_app" {
@@ -43,13 +45,14 @@ module "ec2_mongo" {
 }
 
 module "nat_gateway" {
-  source           = "./modules/nat_gateway"
-  public_subnet_id = module.vpc.public_subnet_id
-  vpc_id           = module.vpc.vpc_id
+  source            = "./modules/nat_gateway"
+  public_subnet_id  = module.vpc.public_subnet_id
+  private_subnet_id = module.vpc.private_subnet_id
+  vpc_id            = module.vpc.vpc_id
 }
 
-module "elb" {
-  source          = "./modules/elb"
+module "alb" {
+  source          = "./modules/alb"
   vpc_id          = module.vpc.vpc_id
   subnet_id       = module.vpc.public_subnet_id
   instance_id     = module.ec2_app.instance_id
