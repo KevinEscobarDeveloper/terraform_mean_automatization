@@ -48,3 +48,12 @@ resource "aws_route_table_association" "public" {
   subnet_id      = aws_subnet.public.id
   route_table_id = aws_route_table.public.id
 }
+
+resource "aws_subnet" "public_b" {
+  vpc_id                  = aws_vpc.main.id
+  cidr_block              = var.public_subnet_b_cidr
+  availability_zone       = var.az_b
+  map_public_ip_on_launch = true
+  tags = { Name = "${var.name}-public-subnet-b" }
+}
+

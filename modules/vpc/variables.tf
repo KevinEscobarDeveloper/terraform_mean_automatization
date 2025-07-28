@@ -18,3 +18,6 @@ variable "name" {
   description = "Project name/prefix"
   type        = string
 }
+
+variable "az_b" {}
+variable "public_subnet_b_cidr" {}
